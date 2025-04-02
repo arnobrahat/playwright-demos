@@ -99,14 +99,37 @@ test('UI control', async({page})=>{
 test.only('child window handle', async({browser})=>{
     const context = await browser.newContext();
     const page = await context.newPage();
+    const username = page.locator('input#username');
+
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     const docLink = page.locator("[href*='documents-request']");
-    //docLink.click();
 
+    // selecting blinking link
+    await expect(docLink).toHaveAttribute("class","blinkingText");
+
+    // make steps synchronys we use await, to make steps asysnchronus we use Promise
+    //promise are 3types: pending, rejected, fulfilled
     const [newPage] = await Promise.all([
-    context.waitForEvent('page'),
+    context.waitForEvent('page'), // waits for new page to open
     docLink.click(),   
+/*
+    const [newPage, anotherPage] = await Promise.all
+    user more valiables if more pages are available and follow the same procedure.
+*/
+    await page.pause(), // this will keep the browser open after execution
     ])
-    //const page2 = context.waitForEvent('page'); // waits for new page to open
+    const text = await newPage.locator(".red").textContent(); //extracting text based on the class "red"
+    console.log(text);    
 
+    const arrayText = text.split("@"); // spliting the extracted text at "@"
+    const domain = arrayText[1].split(" ")[0]; // taking the 2nd position and spitting again and saving the value
+    
+    /* below 2 lines are same as the upper line
+    const fon2 = domain[0];
+    console.log(fon2);
+    */
+    console.log(domain);
+    await page.locator('input#username').type(domain);
+    await page.pause();
+    console.log("printing done");
 });
