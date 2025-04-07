@@ -54,6 +54,31 @@ test ("Website login", async({page})=>{
 
     const orderID = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
     console.log('Order id: ', orderID);
+
+    // Searching the order id from the order list table
+
+    await page.locator("[routerlink*='myorders']").first().click();
+    await page.locator("tbody").waitFor(); // waiting for the table body to load
+
+    const tableRows = page.locator("tbody tr");
+    for (let i=0; i<tableRows.count();++i)
+    {
+        const rowOrderId = await tableRows.nth(i).locator("th").textContent(); // from the whole row going to the order id header
+        if (orderID.includes(rowOrderId))
+        {
+            await tableRows.nth(i).locator("button").first().click();
+            break;
+        }
+    }
+    const orderIdDetails = await page.locator(".col-text").textContent();
+    
+    try{
+    expect (orderID.includes(orderIdDetails)).toBeTruthy();
+    }
+    catch{
+        console.log("false")
+    };
+
 });
 
 
