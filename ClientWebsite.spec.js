@@ -2,11 +2,12 @@ const { test, expect } = require('@playwright/test');
 
 test ("Website login", async({page})=>{
 
+    const email = "anshika@gmail.com";
     const products = page.locator(".card-body");
     const productName = "ZARA COAT 3"
 
     await page.goto ("https://rahulshettyacademy.com/client");
-    await page.locator('#userEmail').fill('anshika@gmail.com');
+    await page.locator('#userEmail').fill(email);
     await page.locator("#userPassword").fill('Iamking@000');
     await page.locator('#login').click();
 
@@ -28,8 +29,13 @@ test ("Website login", async({page})=>{
     await page.locator("div li").first().waitFor(); // this will wait for the first locator to be visible
     const bool = await page.locator("h3:has-text('ZARA COAT 3')").isVisible();
     expect(bool).toBeTruthy();
+    //console.log('ZARA COAT 3');
 
-    // Filling the checkout information
+     // Verifying the email address in checkout is same as login 
+    expect(page.locator(".user__name [type='text']").first()).toHaveText(email);
+    //console.log(email);
+
+    // Finding the country name
     await page.locator("text=Checkout").click();
     await page.locator("[placeholder*='Country']").pressSequentially("ind"); // this method types the inputs one by one.
     
@@ -43,8 +49,11 @@ test ("Website login", async({page})=>{
             break;
         }
     }
-    await page.pause();
-    
+    await page.locator(".action__submit").click();
+    await expect (page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
+
+    const orderID = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
+    console.log('Order id: ', orderID);
 });
 
 
