@@ -33,5 +33,5 @@ test ('Usage of getByLabel locator and use of UI Runner', async({page})=>{
 });
 
 
-// playwrite runner is opned when the below command is given in the terminal
+// playwrite runner is opned when the below command is given in the terminals
 //npx playwright test GetByLabelandUI-Runner.spec.js --ui    
