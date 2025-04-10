@@ -66,19 +66,14 @@ test ("Website login", async({page})=>{
         const rowOrderId = await tableRows.nth(i).locator("th").textContent(); // from the whole row going to the order id header
         if (orderID.includes(rowOrderId))
         {
-            await tableRows.nth(i).locator("button").first().click();
+            await tableRows.nth(i).locator("button").first().click(); // selecting the first button
             break;
         }
     }
-    const orderIdDetails = await page.locator(".col-text").textContent();
+    const orderIdDetails = await page.locator(".col-text.-main").isVisible();
     
-    try{
+    
     expect (orderID.includes(orderIdDetails)).toBeTruthy();
-    }
-    catch{
-        console.log("false")
-    };
-
 });
 
 
