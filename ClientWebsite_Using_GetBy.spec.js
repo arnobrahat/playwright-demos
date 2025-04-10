@@ -29,6 +29,8 @@ test ("Website with getByLocator", async({page})=>{
     await page.getByText("PLACE ORDER").click();
 
     expect(page.getByText("Thankyou for the order.")).toBeVisible();
+
+    //comment out jiajkjda
     
 });
 
