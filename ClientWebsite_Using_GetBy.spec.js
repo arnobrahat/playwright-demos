@@ -31,6 +31,7 @@ test ("Website with getByLocator", async({page})=>{
     expect(page.getByText("Thankyou for the order.")).toBeVisible();
 
     //comment out jiajkjda
+    //gg ma man
     
 });
 
