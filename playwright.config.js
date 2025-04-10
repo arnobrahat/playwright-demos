@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-import { config } from 'process';
+//import { config } from 'process';
 
 /**
  * Read environment variables from file.
@@ -13,8 +13,8 @@ import { config } from 'process';
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
-const configuration = ({
-//export default defineConfig({
+//const configuration = ({
+export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -31,18 +31,21 @@ const configuration = ({
   expect: {
     timeout: 5*1000, //specific section timeout for a test to execute orelse fails before moving to next section
   },
+  
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    //trace: 'on-first-retry', // "on": for every testcase status; "retain-on-failure": for only failed cases
+    trace: 'on', // "on": for every testcase status; "retain-on-failure": for only failed cases
     browserName : "chromium", // chrome browser
     //browserName : "firefox", // firefox 
     //browserName : "webkit", // safari 
 
-    headless: false // true: no browser opens; false: opens browser
-  },
+    headless: false, // true: no browser opens; false: opens browser
+    screenshot: "on",
+    },
 
   /* Configure projects for major browsers */
   // projects: [
@@ -89,5 +92,5 @@ const configuration = ({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-module.exports = configuration
+//module.exports = configuration
 
