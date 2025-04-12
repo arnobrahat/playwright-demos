@@ -1,0 +1,5 @@
+//check the git version
+git --version
+
+/check where git is installed
+where.exe git
