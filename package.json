@@ -1,0 +1,24 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/arnobrahat/playwright-demos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/arnobrahat/playwright-demos/issues"
+  },
+  "homepage": "https://github.com/arnobrahat/playwright-demos#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1"
+  }
+}
